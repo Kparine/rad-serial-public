@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export const Main = () => {
-	const [search, setSearch] = useState([]);
+	const [setSearch] = useState([]);
 
 	const digestSerialCodes = (e) => {
 		let text = e.target.value;

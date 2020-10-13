@@ -46,12 +46,15 @@ body {
 
 .main-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 60vh; }
+  margin: 10px;
+  height: 100vh; }
 
 .main-comp-container {
   display: flex;
+  margin: 20px;
   justify-content: center;
   align-items: center;
   background-color: #131b23;
