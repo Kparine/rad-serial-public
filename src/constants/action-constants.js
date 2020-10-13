@@ -1,1 +1,0 @@
-export const SET_SERIAL_ACTION = "SET_SERIAL_ACTION";

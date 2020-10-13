@@ -3,12 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "css-build": "node-sass --omit-source-map-url src/App.scss src/index.css",
+    "css-watch": "npm run css-build -- --watch",
+    "start": "npm run css-watch & react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

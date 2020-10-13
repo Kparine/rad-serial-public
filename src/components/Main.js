@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const Main = () => {
+	const [search, setSearch] = useState([]);
+
+	const digestSerialCodes = (e) => {
+		let text = e.target.value;
+		text = text.replace(/\n\r?/g, ",").split(",");
+		setSearch(text);
+	};
+
 	return (
-		<div className="footer-container">
-			<div className="footer-content">
-				<img
-					src={`https://cdn.shopify.com/s/files/1/0799/9645/t/67/assets/bg-footer.png`}
-					className="footer-logo"
-					alt="logo"
-				/>
+		<div className="main-comp-container">
+			<div className="main-content">
+				<textarea
+					rows="5"
+					cols="35"
+					placeholder="Enter Serial Codes..."
+					onChange={digestSerialCodes}
+				></textarea>
+				<div
+					className="button w-button"
+					style={{ marginTop: "15px" }}
+					aria-label="search serial codes"
+					onClick={(e) => {
+						console.log("e ******------>>>>>>", e.target);
+					}}
+				>
+					Search
+				</div>
 			</div>
 		</div>
 	);
