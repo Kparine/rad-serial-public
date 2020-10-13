@@ -1,0 +1,121 @@
+@charset "utf-8";
+
+$Black: #131b23;
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.App {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	margin-top: var(— space);
+}
+
+.menu-container {
+	display: flex;
+	height: 100%;
+	max-height: 60px;
+	background-color: #fff;
+	box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.menu-content {
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	min-width: 98%;
+	justify-content: space-between;
+}
+
+.menu-logo {
+	height: 40px;
+	pointer-events: none;
+}
+
+.menu-title {
+	color: #f26326;
+	font-family: Trueno, sans-serif;
+	font-style: italic;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.menu-sub-title {
+	color: black;
+}
+
+body {
+	font-family: "PT Sans", sans-serif;
+	background: -webkit-linear-gradient(
+			transparentize($Black, 0.9),
+			transparentize($Black, 0.9)
+		),
+		url("https://cdn.shopify.com/s/files/1/0799/9645/t/67/assets/bg-footer.png")
+			repeat;
+	background-position: 0 auto;
+	background-size: 0/50% auto;
+	height: 350px;
+}
+
+.main-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 10px;
+	height: 100vh;
+}
+
+.main-comp-container {
+	display: flex;
+	margin: 20px;
+	justify-content: center;
+	align-items: center;
+	background-color: $Black;
+	height: 200px;
+	width: 50%;
+	border-radius: 5px;
+}
+
+.main-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+textarea {
+	resize: none;
+}
+
+.button {
+	max-width: 45px;
+	padding: 8px 36px;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-justify-content: space-around;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	border: 2px solid #f26326;
+	border-radius: 30px;
+	background-color: #f26326;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
+	-webkit-transform-origin: 0% 50%;
+	-ms-transform-origin: 0% 50%;
+	transform-origin: 0% 50%;
+	-webkit-transition: all 150ms ease;
+	transition: all 150ms ease;
+	color: #fff;
+	font-weight: 700;
+	text-align: center;
+	text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.15);
+}
