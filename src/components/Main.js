@@ -31,7 +31,7 @@ const columns = [
 ];
 
 export const Main = () => {
-	const [search, setSearch] = useState([]);
+	const [serialNumber, setSearch] = useState([]);
 	const [bikeData, setBikeData] = useState([]);
 
 	const digestSerialCodes = (e) => {
@@ -40,11 +40,9 @@ export const Main = () => {
 		setSearch(temp);
 	};
 
-	console.log("search ******------>>>>>>", search);
-
 	const SERIAL_CODE_QUERY = gql`
-		{
-			bikes(serialNumber: $search) {
+		query bikes($serialNumber: [String!]) {
+			bikes(serialNumber: $serialNumber) {
 				modelCode
 				yearCode
 				monthCode
@@ -55,12 +53,15 @@ export const Main = () => {
 			}
 		}
 	`;
+
 	const [searchSerialCodes, { data }] = useLazyQuery(SERIAL_CODE_QUERY, {
 		onCompleted: () => {
-			if (data) setBikeData(data.bikes);
+			setBikeData(data.bikes);
 		},
-		variables: { search },
+		variables: { serialNumber: serialNumber },
 	});
+
+	/** Pass in result and create a new mutable array, Graphql std res is unmutable */
 
 	let editable;
 	if (bikeData) {
