@@ -11,7 +11,8 @@ import "./App.scss";
 
 import { Menu } from "./components/Menu";
 import { Main } from "./components/Main";
-
+const token = process.env.REACT_APP_NOT_SECRET_TOKEN;
+localStorage.setItem("token", token);
 const httpLink = new HttpLink({ uri: `http://localhost:4000/` });
 
 const authMiddleware = new ApolloLink((operation, forward) => {

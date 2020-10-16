@@ -3,73 +3,22 @@ import MaterialTable from "material-table";
 
 import { gql, useLazyQuery } from "@apollo/client";
 
-const dataResults = [
-	{
-		model: "RadCity Stepthru",
-		model_yr: "2011",
-		manu_mth: 12,
-		manu_yr: "2014",
-		version: "1",
-		unique: "004706",
-	},
-	{
-		model: "Runner",
-		model_yr: "2011",
-		manu_mth: 6,
-		manu_yr: "2014",
-		version: "1",
-		unique: "004706",
-	},
-	{
-		model: "Small Cargo Box",
-		model_yr: "2011",
-		manu_mth: 9,
-		manu_yr: "2014",
-		version: "1",
-		unique: "004706",
-	},
-	{
-		model: "Flatbed",
-		model_yr: "2011",
-		manu_mth: 10,
-		manu_yr: "2014",
-		version: "1",
-		unique: "004706",
-	},
-	{
-		model: "RadRhino",
-		model_yr: "2011",
-		manu_mth: 11,
-		manu_yr: "2014",
-		version: "1",
-		unique: "004706",
-	},
-	{
-		model: "RadWagon",
-		model_yr: "2011",
-		manu_mth: 12,
-		manu_yr: "2014",
-		version: "1",
-		unique: "004706",
-	},
-];
-
 const columns = [
 	{
 		title: "Model",
-		field: "model",
+		field: "modelCode",
 	},
 	{
 		title: "Model Year",
-		field: "model_yr",
+		field: "yearCode",
 	},
 	{
 		title: "Manuf. Month",
-		field: "manu_mth",
+		field: "monthCode",
 	},
 	{
 		title: "Manuf. Year",
-		field: "manu_yr",
+		field: "manufYear",
 	},
 	{
 		title: "Version",
@@ -82,7 +31,8 @@ const columns = [
 ];
 
 export const Main = () => {
-	const [setSearch] = useState([]);
+	const [search, setSearch] = useState([]);
+	const [bikeData, setBikeData] = useState([]);
 
 	const digestSerialCodes = (e) => {
 		let temp = e.target.value;
@@ -90,9 +40,11 @@ export const Main = () => {
 		setSearch(temp);
 	};
 
+	console.log("search ******------>>>>>>", search);
+
 	const SERIAL_CODE_QUERY = gql`
 		{
-			bikes(serialNumber: ["YD419F201062", "YD419F201061"]) {
+			bikes(serialNumber: $search) {
 				modelCode
 				yearCode
 				monthCode
@@ -103,17 +55,17 @@ export const Main = () => {
 			}
 		}
 	`;
+	const [searchSerialCodes, { data }] = useLazyQuery(SERIAL_CODE_QUERY, {
+		onCompleted: () => {
+			if (data) setBikeData(data.bikes);
+		},
+		variables: { search },
+	});
 
-	const [searchSerialCodes, { loading, error, data }] = useLazyQuery(
-		SERIAL_CODE_QUERY
-	);
-	if (loading) console.log("loading ******------>>>>>>", loading);
-	if (error) console.log("error ******------>>>>>>", error);
-	if (data) console.log("data ******------>>>>>>", data);
-
-	const token =
-		"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.UoX4WU0IZB-nH48rBZRXxVbla70F8aV49-bfhc7l58A";
-	localStorage.setItem("token", token);
+	let editable;
+	if (bikeData) {
+		editable = bikeData.map((o) => ({ ...o }));
+	}
 
 	return (
 		<div>
@@ -135,19 +87,23 @@ export const Main = () => {
 					</div>
 				</div>
 			</div>
-			<MaterialTable
-				title="Serial Code Details"
-				data={dataResults}
-				columns={columns}
-				options={{
-					search: false,
-					paging: false,
-					sorting: false,
-					filtering: false,
-					exportButton: false,
-				}}
-				style={{ minWidth: "75%" }}
-			/>
+			<div>
+				{bikeData.length ? (
+					<MaterialTable
+						title="Serial Code Details"
+						data={editable}
+						columns={columns}
+						options={{
+							search: false,
+							paging: false,
+							sorting: false,
+							filtering: false,
+							exportButton: false,
+						}}
+						style={{ minWidth: "75%" }}
+					/>
+				) : null}
+			</div>
 		</div>
 	);
 };

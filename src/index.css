@@ -59,7 +59,8 @@ body {
   align-items: center;
   background-color: #131b23;
   height: 200px;
-  border-radius: 5px; }
+  border-radius: 5px;
+  min-width: 542px; }
 
 .main-content {
   display: flex;
