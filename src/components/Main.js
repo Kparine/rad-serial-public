@@ -35,7 +35,9 @@ export const Main = () => {
 	const [bikeData, setBikeData] = useState([]);
 
 	const digestSerialCodes = (e) => {
+		e.preventDefault();
 		let temp = e.target.value;
+		if (!e.target.value) return setSearch([]);
 		temp = temp.replace(/\n\r?/g, ",").split(",");
 		setSearch(temp);
 	};
@@ -54,19 +56,24 @@ export const Main = () => {
 		}
 	`;
 
-	const [searchSerialCodes, { data }] = useLazyQuery(SERIAL_CODE_QUERY, {
+	const [searchSerialCodes, { data, error}] = useLazyQuery(SERIAL_CODE_QUERY, {
 		onCompleted: () => {
-			setBikeData(data.bikes);
+			if (data) setBikeData(data.bikes);
+			if (!data) console.log(error,"no data")
 		},
 		variables: { serialNumber: serialNumber },
 	});
 
-	/** Pass in result and create a new mutable array, Graphql std res is unmutable */
+	/**
+	 * @param {array} bikeData
+	 * Graphql std res is immutable, pass through map to create new mutable array for <Material Table/>
+	 * */
 
 	let editable;
 	if (bikeData) {
 		editable = bikeData.map((o) => ({ ...o }));
 	}
+
 
 	return (
 		<div>
@@ -78,14 +85,22 @@ export const Main = () => {
 						placeholder="Enter Serial Codes..."
 						onChange={digestSerialCodes}
 					></textarea>
-					<div
+					<button
 						className="button w-button"
-						style={{ marginTop: "15px" }}
 						aria-label="search serial codes"
 						onClick={searchSerialCodes}
+						disabled={!serialNumber.length ? true : false}
+						style={{
+							marginTop: "15px",
+							cursor: !serialNumber.length? "not-allowed" : "pointer",
+							backgroundColor: !serialNumber.length ? "#d3d3d3" : "#f26326",
+							border: !serialNumber.length
+								? "2px solid #d3d3d3"
+								: "2px solid #f26326",
+						}}
 					>
 						Search
-					</div>
+					</button>
 				</div>
 			</div>
 			<div>
