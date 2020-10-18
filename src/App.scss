@@ -66,7 +66,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	margin: 10px;
-	height: 100vh;
+	// height: 100vh;
 }
 
 .main-comp-container {
@@ -76,8 +76,8 @@ body {
 	align-items: center;
 	background-color: $Black;
 	height: 200px;
-	width: 50%;
 	border-radius: 5px;
+	min-width: 542px;
 }
 
 .main-content {
@@ -91,28 +91,14 @@ textarea {
 }
 
 .button {
-	max-width: 45px;
 	padding: 8px 36px;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: row;
-	-ms-flex-direction: row;
 	flex-direction: row;
-	-webkit-justify-content: space-around;
-	-ms-flex-pack: distribute;
 	justify-content: space-around;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	-ms-flex-align: center;
 	align-items: center;
 	border: 2px solid #f26326;
 	border-radius: 30px;
-	background-color: #f26326;
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
-	-webkit-transform-origin: 0% 50%;
-	-ms-transform-origin: 0% 50%;
 	transform-origin: 0% 50%;
-	-webkit-transition: all 150ms ease;
 	transition: all 150ms ease;
 	color: #fff;
 	font-weight: 700;
