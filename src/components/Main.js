@@ -65,7 +65,7 @@ export const Main = () => {
 	});
 
 	/**
-	 * @param {array} bikeData
+	 * @param {arraynpm run } bikeData
 	 * Graphql std res is immutable, pass through map to create new mutable array for <Material Table/>
 	 * */
 
