@@ -17,16 +17,16 @@ npm run start
 ```
 
 ### Deployed Front-End
+
+- Navigate to the address below for Deployed Client
+
 https://rad-serial-public.herokuapp.com/
 
 ## Technologies Utilized:
 
 - React
 - ApolloGraphql Client
+- Heroku
+- JSON Web Token (JWT)
 - Material-Table
 - Sass
-
-
-## Acknolwedgements
-
-- In a production application, the JWT would never be commited or hard-coded, as it would be created by the user. 
